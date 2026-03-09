@@ -348,6 +348,40 @@ body {
   font-size: 0.9rem;
 }
 
+/* Idea Cards */
+.idea-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.idea-header {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.idea-problem {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.idea-footer {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.idea-next {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
 /* Footer */
 .site-footer {
   text-align: center;

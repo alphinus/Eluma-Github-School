@@ -1,0 +1,12 @@
+{
+  "categories": [
+    { "id": "app-idee", "name": "App-Idee", "color": "#2d6df6" },
+    { "id": "automatisierung", "name": "Automatisierung", "color": "#10b981" },
+    { "id": "ki-workflow", "name": "KI-Workflow", "color": "#8b5cf6" },
+    { "id": "geschaeftsmodell", "name": "Geschäftsmodell", "color": "#f59e0b" },
+    { "id": "content", "name": "Content", "color": "#ec4899" },
+    { "id": "problem", "name": "Problem", "color": "#ef4444" },
+    { "id": "experiment", "name": "Experiment", "color": "#06b6d4" },
+    { "id": "offene-frage", "name": "Offene Frage", "color": "#6b7280" }
+  ]
+}

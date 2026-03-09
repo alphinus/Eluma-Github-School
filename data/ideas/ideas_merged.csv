@@ -1,0 +1,9 @@
+id,owner,title,category,summary,problem,potential,next_step,status,created_at,updated_at
+M001,Mario,KI-Workflow-Automatisierung,Automatisierung,Automatisierung von Standardprozessen mit Claude Code und Skripten,Viele repetitive Aufgaben kosten täglich Zeit,Nicht nur ein Tool sondern ein ganzes Workflow-System,Prototyp bauen,discussing,2026-01-15,2026-01-15
+M002,Mario,GitHub Learning Platform,App-Idee,Spielerische Lernumgebung mit echten GitHub-Abläufen,Einsteiger verstehen Git-Workflows nicht praktisch,Lernen durch echte PRs statt Simulation,MVP starten,building,2026-01-20,2026-01-20
+M003,Mario,Shopify Autopilot,Automatisierung,Automatische Preissynchronisation und Bestandsprüfung,Produktpflege und Preisanpassung kosten viel Zeit,Vollautomatisch statt manuell,Bestands-Check implementieren,validated,2026-02-01,2026-02-01
+M004,Mario,Newsletter Intelligence,KI-Workflow,Automatisches Scannen und Zusammenfassen von AI-Newslettern,Wichtige AI-News gehen im Rauschen unter,Kuratiert und auf Geschäftsideen fokussiert,Feed-Quellen definieren,raw,2026-02-10,2026-02-10
+M005,Mario,Second Brain Obsidian Sync,Automatisierung,Automatische Synchronisation zwischen Claude Code und Obsidian,Wissen geht zwischen Tools verloren,Bidirektionaler Sync statt Export,Sync-Logik testen,discussing,2026-02-15,2026-02-15
+E001,Elvis,Schul-App für Notenverwaltung,App-Idee,Einfache App zum Tracken von Noten und Aufgaben,Noten und Hausaufgaben sind unübersichtlich,Speziell für Schweizer Schulsystem,Design-Mockup erstellen,raw,2026-02-20,2026-02-20
+E002,Elvis,Discord Bot für Lerngruppen,App-Idee,Bot der Lerngruppen verwaltet und Termine plant,Lerngruppen-Organisation ist chaotisch,Integriert in Discord statt neue App,Bot-Framework testen,discussing,2026-02-22,2026-02-22
+E003,Elvis,Meme Generator mit KI,Experiment,KI-gestützter Meme-Generator mit Templates,Memes manuell erstellen dauert lange,Lokale Meme-Styles und Trends,API-Optionen recherchieren,raw,2026-03-01,2026-03-01

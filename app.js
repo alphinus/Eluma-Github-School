@@ -1,9 +1,15 @@
 // Eluma GitHub School — App
 
-document.addEventListener('DOMContentLoaded', () => {
+let ideasData = [];
+let categoriesData = [];
+
+document.addEventListener('DOMContentLoaded', async () => {
   initNavigation();
   initLevelTabs();
   initPlayground();
+  await loadCategories();
+  await loadIdeas();
+  initIdeaFilters();
   updateNextMission();
 });
 
@@ -146,8 +152,116 @@ function initTestCard() {
   });
 }
 
+// --- Ideenboard ---
+
+async function loadCategories() {
+  try {
+    const res = await fetch('data/config/categories.json');
+    const data = await res.json();
+    categoriesData = data.categories;
+
+    const select = document.getElementById('filter-category');
+    if (select) {
+      categoriesData.forEach(cat => {
+        const opt = document.createElement('option');
+        opt.value = cat.name;
+        opt.textContent = cat.name;
+        select.appendChild(opt);
+      });
+    }
+  } catch (e) {
+    console.log('Kategorien konnten nicht geladen werden:', e);
+  }
+}
+
+function parseCSV(text) {
+  const lines = text.trim().split('\n');
+  if (lines.length < 2) return [];
+  const headers = lines[0].split(',');
+  return lines.slice(1).map(line => {
+    const values = line.split(',');
+    const obj = {};
+    headers.forEach((h, i) => obj[h.trim()] = (values[i] || '').trim());
+    return obj;
+  });
+}
+
+async function loadIdeas() {
+  try {
+    const res = await fetch('data/ideas/ideas_merged.csv');
+    const text = await res.text();
+    ideasData = parseCSV(text);
+    renderIdeas(ideasData);
+  } catch (e) {
+    console.log('Ideen konnten nicht geladen werden:', e);
+  }
+}
+
+function renderIdeas(ideas) {
+  const grid = document.getElementById('ideas-grid');
+  if (!grid) return;
+
+  if (ideas.length === 0) {
+    grid.innerHTML = '<div class="card placeholder-card"><h3>Keine Ideen gefunden</h3><p>Ändere die Filter oder füge neue Ideen hinzu.</p></div>';
+    return;
+  }
+
+  const categoryColor = (name) => {
+    const cat = categoriesData.find(c => c.name.toLowerCase() === name.toLowerCase());
+    return cat ? cat.color : '#6b7280';
+  };
+
+  const statusLabels = {
+    raw: 'Roh',
+    discussing: 'In Diskussion',
+    validated: 'Validiert',
+    parked: 'Geparkt',
+    building: 'Im Bau'
+  };
+
+  grid.innerHTML = ideas.map(idea => `
+    <div class="card idea-card">
+      <div class="idea-header">
+        <span class="badge badge-owner">${idea.owner}</span>
+        <span class="badge" style="background: ${categoryColor(idea.category)}20; color: ${categoryColor(idea.category)}">${idea.category}</span>
+      </div>
+      <h3>${idea.title}</h3>
+      <p>${idea.summary}</p>
+      ${idea.problem ? `<p class="idea-problem"><strong>Problem:</strong> ${idea.problem}</p>` : ''}
+      <div class="idea-footer">
+        <span class="badge badge-status">${statusLabels[idea.status] || idea.status}</span>
+        ${idea.next_step ? `<span class="idea-next">Nächster Schritt: ${idea.next_step}</span>` : ''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function initIdeaFilters() {
+  const ownerFilter = document.getElementById('filter-owner');
+  const categoryFilter = document.getElementById('filter-category');
+  const statusFilter = document.getElementById('filter-status');
+
+  const applyFilters = () => {
+    const owner = ownerFilter?.value || 'all';
+    const category = categoryFilter?.value || 'all';
+    const status = statusFilter?.value || 'all';
+
+    const filtered = ideasData.filter(idea => {
+      if (owner !== 'all' && idea.owner !== owner) return false;
+      if (category !== 'all' && idea.category !== category) return false;
+      if (status !== 'all' && idea.status !== status) return false;
+      return true;
+    });
+
+    renderIdeas(filtered);
+  };
+
+  ownerFilter?.addEventListener('change', applyFilters);
+  categoryFilter?.addEventListener('change', applyFilters);
+  statusFilter?.addEventListener('change', applyFilters);
+}
+
 // --- Stubs für spätere Module ---
 
-// loadIdeas() — Session 5
 // loadMissions() — Session 6
 // initGlossar() — Session 7
