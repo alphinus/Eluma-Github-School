@@ -80,11 +80,66 @@
     <section id="playground" class="section">
       <div class="section-header">
         <h2>Playground</h2>
+        <p class="section-desc">Ändere Farben, Texte und Elemente — jede Codeänderung wird sofort sichtbar!</p>
       </div>
+
       <div class="card-grid">
-        <div class="card placeholder-card">
-          <h3>Playground kommt bald</h3>
-          <p>Hier kannst du Farben ändern, Buttons anpassen und Elemente ein- und ausblenden.</p>
+        <!-- Theme-Farbe-Switcher -->
+        <div class="card playground-card">
+          <h3>Theme-Farbe</h3>
+          <p>Wähle ein Farbschema für die ganze Seite:</p>
+          <div class="theme-switcher">
+            <button class="theme-btn active" data-theme="default" style="background: #2d6df6;" title="Standard"></button>
+            <button class="theme-btn" data-theme="ocean" style="background: #0891b2;" title="Ozean"></button>
+            <button class="theme-btn" data-theme="forest" style="background: #16a34a;" title="Wald"></button>
+            <button class="theme-btn" data-theme="sunset" style="background: #e11d48;" title="Sonnenuntergang"></button>
+            <button class="theme-btn" data-theme="night" style="background: #8b5cf6;" title="Nacht"></button>
+          </div>
+          <p class="theme-name">Aktiv: <strong id="active-theme-name">Standard</strong></p>
+        </div>
+
+        <!-- Button mit änderbarem Text + Farbe -->
+        <div class="card playground-card">
+          <h3>Magischer Button</h3>
+          <p>Ändere Text und Farbe dieses Buttons:</p>
+          <button id="magic-button" class="magic-btn">Klick mich!</button>
+          <div class="playground-controls">
+            <input type="text" id="btn-text-input" placeholder="Neuer Button-Text" maxlength="30">
+            <input type="color" id="btn-color-input" value="#2d6df6">
+            <button class="apply-btn" id="apply-btn-changes">Anwenden</button>
+          </div>
+        </div>
+
+        <!-- Statusbadge -->
+        <div class="card playground-card">
+          <h3>Statusbadge</h3>
+          <p>Ändere den Status-Text:</p>
+          <div class="status-display">
+            <span id="status-badge" class="badge badge-status">Online</span>
+          </div>
+          <div class="playground-controls">
+            <input type="text" id="status-input" placeholder="Neuer Status" maxlength="20">
+            <select id="status-color-select">
+              <option value="success">Grün</option>
+              <option value="warning">Gelb</option>
+              <option value="danger">Rot</option>
+              <option value="info">Blau</option>
+            </select>
+            <button class="apply-btn" id="apply-status">Anwenden</button>
+          </div>
+        </div>
+
+        <!-- Testkarte ein-/ausblenden -->
+        <div class="card playground-card">
+          <h3>Testkarte</h3>
+          <p>Blende die Karte ein oder aus:</p>
+          <button class="apply-btn" id="toggle-test-card">Karte anzeigen</button>
+          <div id="test-card" class="test-card hidden">
+            <div class="test-card-inner">
+              <h4>Geheime Karte</h4>
+              <p>Diese Karte war versteckt! Du hast sie gefunden.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
