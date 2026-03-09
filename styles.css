@@ -22,6 +22,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background: var(--color-bg);
@@ -390,6 +394,84 @@ body {
 .mission-criteria li {
   color: var(--color-text-muted);
   margin-bottom: 0.15rem;
+}
+
+/* Glossar */
+.glossar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.glossar-item {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: box-shadow var(--transition);
+}
+
+.glossar-item:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.glossar-item[open] {
+  border-color: var(--color-primary);
+}
+
+.glossar-term {
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--color-primary);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.glossar-term::after {
+  content: "+";
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  transition: transform var(--transition);
+}
+
+.glossar-item[open] .glossar-term::after {
+  content: "-";
+}
+
+.glossar-term::-webkit-details-marker {
+  display: none;
+}
+
+.glossar-content {
+  padding: 0 1.5rem 1.25rem;
+}
+
+.glossar-content p {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.glossar-mission {
+  font-size: 0.85rem !important;
+  margin-top: 0.5rem;
+}
+
+.glossar-mission a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.glossar-mission a:hover {
+  text-decoration: underline;
 }
 
 /* Idea Cards */

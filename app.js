@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadIdeas();
   initIdeaFilters();
   await loadMissions();
+  initGlossarLinks();
   updateNextMission();
 });
 
@@ -324,6 +325,26 @@ function renderMissions(missions) {
   }).join('');
 }
 
-// --- Stubs für spätere Module ---
+// --- Glossar ---
 
-// initGlossar() — Session 7
+function initGlossarLinks() {
+  document.querySelectorAll('.glossar-mission a[data-mission]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const missionId = link.dataset.mission;
+      const level = parseInt(missionId.split('-')[0].replace('L', ''));
+
+      // Zur Missionen-Sektion wechseln
+      showSection('missionen');
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('.nav-btn[data-section="missionen"]')?.classList.add('active');
+
+      // Level-Tab aktivieren
+      document.querySelectorAll('.level-tab').forEach(t => t.classList.remove('active'));
+      document.querySelector(`.level-tab[data-level="${level}"]`)?.classList.add('active');
+
+      // Nach Level filtern
+      renderMissions(missionsData.filter(m => m.level === level));
+    });
+  });
+}
