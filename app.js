@@ -2,6 +2,7 @@
 
 let ideasData = [];
 let categoriesData = [];
+let missionsData = [];
 
 document.addEventListener('DOMContentLoaded', async () => {
   initNavigation();
@@ -10,6 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadCategories();
   await loadIdeas();
   initIdeaFilters();
+  await loadMissions();
   updateNextMission();
 });
 
@@ -43,7 +45,12 @@ function initLevelTabs() {
     tab.addEventListener('click', () => {
       tabs.forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
-      // Filtering wird in Session 6 implementiert
+      const level = tab.dataset.level;
+      if (level === 'all') {
+        renderMissions(missionsData);
+      } else {
+        renderMissions(missionsData.filter(m => m.level === parseInt(level)));
+      }
     });
   });
 }
@@ -52,7 +59,11 @@ function initLevelTabs() {
 
 function updateNextMission() {
   const el = document.getElementById('next-mission');
-  if (el) {
+  if (!el) return;
+  if (missionsData.length > 0) {
+    const first = missionsData[0];
+    el.textContent = `Level ${first.level}: ${first.title}`;
+  } else {
     el.textContent = 'Level 1, Mission 1: Button-Farbe ändern';
   }
 }
@@ -261,7 +272,58 @@ function initIdeaFilters() {
   statusFilter?.addEventListener('change', applyFilters);
 }
 
+// --- Missionssystem ---
+
+async function loadMissions() {
+  try {
+    const res = await fetch('data/missions/missions.json');
+    const data = await res.json();
+    missionsData = data.missions;
+    renderMissions(missionsData);
+  } catch (e) {
+    console.log('Missionen konnten nicht geladen werden:', e);
+  }
+}
+
+function renderMissions(missions) {
+  const grid = document.getElementById('missions-grid');
+  if (!grid) return;
+
+  if (missions.length === 0) {
+    grid.innerHTML = '<div class="card placeholder-card"><h3>Keine Missionen gefunden</h3><p>Wähle ein anderes Level.</p></div>';
+    return;
+  }
+
+  const difficultyColors = {
+    einfach: { bg: '#f0fdf4', color: '#10b981' },
+    mittel: { bg: '#fffbeb', color: '#f59e0b' },
+    schwer: { bg: '#fef2f2', color: '#ef4444' }
+  };
+
+  grid.innerHTML = missions.map(m => {
+    const dc = difficultyColors[m.difficulty] || { bg: '#f3f4f6', color: '#6b7280' };
+    return `
+      <div class="card mission-card">
+        <div class="mission-header">
+          <span class="badge" style="background: var(--color-primary); color: white;">Level ${m.level}</span>
+          <span class="badge" style="background: ${dc.bg}; color: ${dc.color};">${m.difficulty}</span>
+        </div>
+        <h3>${m.title}</h3>
+        <p class="mission-story">${m.story}</p>
+        <div class="mission-details">
+          <p><strong>Ziel:</strong> ${m.objective}</p>
+          ${m.files_to_edit.length > 0 ? `<p><strong>Dateien:</strong> ${m.files_to_edit.join(', ')}</p>` : ''}
+          <p><strong>GitHub-Skill:</strong> ${m.github_skill}</p>
+        </div>
+        <div class="mission-criteria">
+          <strong>Erfolgskriterien:</strong>
+          <ul>${m.acceptance_criteria.map(c => `<li>${c}</li>`).join('')}</ul>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
 // --- Stubs für spätere Module ---
 
-// loadMissions() — Session 6
 // initGlossar() — Session 7

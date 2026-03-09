@@ -1,0 +1,314 @@
+{
+  "missions": [
+    {
+      "mission_id": "L1-M1",
+      "level": 1,
+      "title": "Button-Farbe ändern",
+      "story": "Der blaue Button im Playground soll grün werden. Aber nicht einfach so — du machst das über einen eigenen Branch und einen Pull Request!",
+      "objective": "Einen Branch erstellen, eine CSS-Änderung vornehmen, committen, pushen und einen PR öffnen.",
+      "files_to_edit": ["styles.css"],
+      "branch_name_example": "mission/level-1-button-farbe",
+      "acceptance_criteria": [
+        "Branch wurde erstellt",
+        "Button-Farbe wurde in styles.css geändert",
+        "Änderung wurde committed und gepusht",
+        "PR wurde auf GitHub geöffnet"
+      ],
+      "github_skill": "Branch erstellen, Commit, Push, PR öffnen",
+      "difficulty": "einfach",
+      "prerequisites": []
+    },
+    {
+      "mission_id": "L1-M2",
+      "level": 1,
+      "title": "Überschrift der Startseite anpassen",
+      "story": "Die Willkommens-Nachricht soll persönlicher werden. Ändere den Text auf der Startseite.",
+      "objective": "Eine HTML-Datei ändern, committen und per PR einreichen.",
+      "files_to_edit": ["index.html"],
+      "branch_name_example": "mission/level-1-welcome-text",
+      "acceptance_criteria": [
+        "Willkommenstext wurde geändert",
+        "Änderung als PR eingereicht",
+        "PR-Beschreibung erklärt die Änderung"
+      ],
+      "github_skill": "Dateien ändern, PR-Beschreibung schreiben",
+      "difficulty": "einfach",
+      "prerequisites": ["L1-M1"]
+    },
+    {
+      "mission_id": "L1-M3",
+      "level": 1,
+      "title": "Eine neue Ideen-Karte hinzufügen",
+      "story": "Du hast eine eigene Idee? Trage sie in die CSV-Datei ein und sieh zu, wie sie im Ideenboard erscheint!",
+      "objective": "Eine neue Zeile in ideas_merged.csv ergänzen und per PR einreichen.",
+      "files_to_edit": ["data/ideas/ideas_merged.csv"],
+      "branch_name_example": "mission/level-1-neue-idee",
+      "acceptance_criteria": [
+        "Neue Zeile in CSV korrekt formatiert",
+        "Idee erscheint im Ideenboard",
+        "PR enthält Beschreibung der Idee"
+      ],
+      "github_skill": "CSV-Datei bearbeiten, Datenformat einhalten",
+      "difficulty": "einfach",
+      "prerequisites": ["L1-M1"]
+    },
+    {
+      "mission_id": "L1-M4",
+      "level": 1,
+      "title": "GitHub Mobile App einrichten",
+      "story": "Installiere die GitHub App auf deinem Handy und aktiviere Benachrichtigungen. Ab jetzt bekommst du Push-Notifications für PRs und Reviews!",
+      "objective": "GitHub Mobile installieren und mindestens eine echte Notification empfangen.",
+      "files_to_edit": [],
+      "branch_name_example": "",
+      "acceptance_criteria": [
+        "GitHub Mobile ist installiert",
+        "Benachrichtigungen sind aktiviert",
+        "Mindestens eine Notification wurde empfangen"
+      ],
+      "github_skill": "GitHub Mobile, Notifications",
+      "difficulty": "einfach",
+      "prerequisites": []
+    },
+    {
+      "mission_id": "L1-M5",
+      "level": 1,
+      "title": "README-Korrektur einreichen",
+      "story": "Jede gute Dokumentation braucht Pflege. Finde einen Tippfehler oder eine Verbesserung in der README und reiche sie ein.",
+      "objective": "README.md verbessern und die Änderung per PR einreichen.",
+      "files_to_edit": ["README.md"],
+      "branch_name_example": "mission/level-1-readme-fix",
+      "acceptance_criteria": [
+        "Sinnvolle Verbesserung in README",
+        "PR korrekt erstellt",
+        "PR-Beschreibung erklärt was und warum"
+      ],
+      "github_skill": "Dokumentation pflegen, PR-Qualität",
+      "difficulty": "einfach",
+      "prerequisites": ["L1-M2"]
+    },
+    {
+      "mission_id": "L2-M1",
+      "level": 2,
+      "title": "Lokal ändern, aber noch nicht pushen",
+      "story": "Du änderst etwas lokal und schaust auf GitHub — nichts hat sich geändert! Verstehe den Unterschied zwischen lokal und remote.",
+      "objective": "Eine lokale Änderung vornehmen, committen, aber bewusst NICHT pushen. Den Unterschied erkennen.",
+      "files_to_edit": ["index.html"],
+      "branch_name_example": "mission/level-2-local-only",
+      "acceptance_criteria": [
+        "Lokale Änderung committed",
+        "Auf GitHub ist die Änderung NICHT sichtbar",
+        "Unterschied kann erklärt werden"
+      ],
+      "github_skill": "Lokal vs. Remote verstehen",
+      "difficulty": "mittel",
+      "prerequisites": ["L1-M1", "L1-M2"]
+    },
+    {
+      "mission_id": "L2-M2",
+      "level": 2,
+      "title": "Branch pushen und im Browser prüfen",
+      "story": "Jetzt pushst du deinen Branch und prüfst im Browser, ob die Änderung auf GitHub angekommen ist.",
+      "objective": "Einen Branch pushen und auf GitHub verifizieren, dass die Änderung sichtbar ist.",
+      "files_to_edit": [],
+      "branch_name_example": "mission/level-2-push-verify",
+      "acceptance_criteria": [
+        "Branch wurde gepusht",
+        "Änderung ist auf GitHub im Branch sichtbar",
+        "Main ist unverändert"
+      ],
+      "github_skill": "Push, Remote-Branch prüfen",
+      "difficulty": "mittel",
+      "prerequisites": ["L2-M1"]
+    },
+    {
+      "mission_id": "L2-M3",
+      "level": 2,
+      "title": "Fremden Merge synchronisieren",
+      "story": "Mario hat etwas auf main gemerged. Hole dir die Änderungen in deinen lokalen Stand.",
+      "objective": "Nach einem Merge auf main den lokalen Stand mit git pull aktualisieren.",
+      "files_to_edit": [],
+      "branch_name_example": "",
+      "acceptance_criteria": [
+        "git pull wurde ausgeführt",
+        "Lokaler main ist aktuell",
+        "Neue Änderungen sind lokal sichtbar"
+      ],
+      "github_skill": "git pull, Synchronisation",
+      "difficulty": "mittel",
+      "prerequisites": ["L2-M2"]
+    },
+    {
+      "mission_id": "L2-M4",
+      "level": 2,
+      "title": "PR nach Feedback ergänzen",
+      "story": "Dein PR hat einen Review-Kommentar bekommen. Ergänze die gewünschte Änderung auf deinem Branch.",
+      "objective": "Einen bestehenden PR durch einen weiteren Commit auf dem gleichen Branch ergänzen.",
+      "files_to_edit": [],
+      "branch_name_example": "",
+      "acceptance_criteria": [
+        "Review-Kommentar wurde gelesen",
+        "Neuer Commit auf dem gleichen Branch",
+        "PR zeigt den neuen Commit an"
+      ],
+      "github_skill": "PR ergänzen, auf Feedback reagieren",
+      "difficulty": "mittel",
+      "prerequisites": ["L2-M2"]
+    },
+    {
+      "mission_id": "L3-M1",
+      "level": 3,
+      "title": "Idee in eigenem Branch anlegen",
+      "story": "Du hast eine neue Idee. Lege sie in einem sauber benannten idea/-Branch an.",
+      "objective": "Einen Branch mit korrektem Namensschema erstellen und eine Idee hinzufügen.",
+      "files_to_edit": ["data/ideas/ideas_merged.csv"],
+      "branch_name_example": "idea/neue-app-konzept",
+      "acceptance_criteria": [
+        "Branch folgt dem Schema idea/<beschreibung>",
+        "Neue Idee in CSV ergänzt",
+        "PR erstellt mit sinnvoller Beschreibung"
+      ],
+      "github_skill": "Branch-Namenskonventionen, strukturiertes Arbeiten",
+      "difficulty": "mittel",
+      "prerequisites": ["L2-M2"]
+    },
+    {
+      "mission_id": "L3-M2",
+      "level": 3,
+      "title": "UI-Anpassung im Feature-Branch",
+      "story": "Der Playground braucht eine Verbesserung. Arbeite auf einem feature/-Branch daran.",
+      "objective": "Auf einem feature/-Branch eine sichtbare UI-Änderung vornehmen.",
+      "files_to_edit": ["styles.css", "index.html"],
+      "branch_name_example": "feature/playground-verbesserung",
+      "acceptance_criteria": [
+        "Branch folgt dem Schema feature/<beschreibung>",
+        "UI-Änderung ist sichtbar",
+        "PR enthält Vorher/Nachher-Beschreibung"
+      ],
+      "github_skill": "Feature-Branches, bewusste Benennung",
+      "difficulty": "mittel",
+      "prerequisites": ["L3-M1"]
+    },
+    {
+      "mission_id": "L3-M3",
+      "level": 3,
+      "title": "Dokumentationsfix im Fix-Branch",
+      "story": "Du hast einen Fehler in der Dokumentation gefunden. Behebe ihn auf einem fix/-Branch.",
+      "objective": "Einen fix/-Branch für eine Dokumentationskorrektur erstellen.",
+      "files_to_edit": ["docs/glossary.md"],
+      "branch_name_example": "fix/glossar-tippfehler",
+      "acceptance_criteria": [
+        "Branch folgt dem Schema fix/<beschreibung>",
+        "Fehler in Doku wurde behoben",
+        "PR klar und kurz beschrieben"
+      ],
+      "github_skill": "Fix-Branches, kleine fokussierte PRs",
+      "difficulty": "mittel",
+      "prerequisites": ["L3-M1"]
+    },
+    {
+      "mission_id": "L4-M1",
+      "level": 4,
+      "title": "Überschriften-Konflikt",
+      "story": "Mario und Elvis ändern beide die gleiche Überschrift in index.html — auf verschiedenen Branches. Wer gewinnt? Niemand automatisch!",
+      "objective": "Einen Merge-Konflikt absichtlich erzeugen und manuell lösen.",
+      "files_to_edit": ["index.html"],
+      "branch_name_example": "conflict/header-title",
+      "acceptance_criteria": [
+        "Beide haben die gleiche Zeile geändert",
+        "Merge-Konflikt ist aufgetreten",
+        "Konflikt wurde manuell gelöst",
+        "Lösung wurde dokumentiert"
+      ],
+      "github_skill": "Merge-Konflikte erkennen und lösen",
+      "difficulty": "schwer",
+      "prerequisites": ["L3-M2"]
+    },
+    {
+      "mission_id": "L4-M2",
+      "level": 4,
+      "title": "CSV-Konflikt lösen",
+      "story": "Beide ändern denselben CSV-Eintrag. Ein typischer Daten-Konflikt, den du lösen musst.",
+      "objective": "Einen Konflikt in einer CSV-Datei erkennen und die richtige Version auswählen.",
+      "files_to_edit": ["data/ideas/ideas_merged.csv"],
+      "branch_name_example": "conflict/csv-eintrag",
+      "acceptance_criteria": [
+        "Gleicher CSV-Eintrag wurde auf zwei Branches geändert",
+        "Konflikt ist aufgetreten",
+        "Inhaltlich richtige Version wurde gewählt",
+        "Begründung steht im PR"
+      ],
+      "github_skill": "Daten-Konflikte, bewusste Entscheidung",
+      "difficulty": "schwer",
+      "prerequisites": ["L4-M1"]
+    },
+    {
+      "mission_id": "L5-M1",
+      "level": 5,
+      "title": "PR-Beschreibung verbessern",
+      "story": "Ein PR hat eine schlechte Beschreibung. Schreibe sie so um, dass ein Reviewer sofort versteht, was und warum geändert wurde.",
+      "objective": "Eine bestehende PR-Beschreibung verbessern und Qualitätsstandards einhalten.",
+      "files_to_edit": [],
+      "branch_name_example": "",
+      "acceptance_criteria": [
+        "PR-Beschreibung beantwortet: Was, Warum, Wie testen",
+        "Beschreibung ist klar und verständlich",
+        "Template wurde sinnvoll genutzt"
+      ],
+      "github_skill": "PR-Qualität, Kommunikation",
+      "difficulty": "schwer",
+      "prerequisites": ["L3-M2"]
+    },
+    {
+      "mission_id": "L5-M2",
+      "level": 5,
+      "title": "Ersten Review-Kommentar schreiben",
+      "story": "Du bekommst einen PR zum Review. Lies die Änderungen und schreibe einen konstruktiven Kommentar.",
+      "objective": "Einen PR auf GitHub reviewen und einen sinnvollen Kommentar hinterlassen.",
+      "files_to_edit": [],
+      "branch_name_example": "",
+      "acceptance_criteria": [
+        "PR wurde gelesen und verstanden",
+        "Review-Kommentar ist sachlich und konkret",
+        "Kommentar enthält Verbesserungsvorschlag oder Lob"
+      ],
+      "github_skill": "Code Review, konstruktives Feedback",
+      "difficulty": "schwer",
+      "prerequisites": ["L5-M1"]
+    },
+    {
+      "mission_id": "L5-M3",
+      "level": 5,
+      "title": "Request Changes einsetzen",
+      "story": "Ein PR hat eine kleine Schwäche. Nutze 'Request Changes' und erkläre, was verbessert werden soll.",
+      "objective": "Die GitHub-Review-Funktion 'Request Changes' korrekt einsetzen.",
+      "files_to_edit": [],
+      "branch_name_example": "",
+      "acceptance_criteria": [
+        "'Request Changes' wurde auf GitHub ausgewählt",
+        "Kommentar erklärt was geändert werden soll",
+        "Ton ist sachlich und hilfreich"
+      ],
+      "github_skill": "Request Changes, Review-Workflow",
+      "difficulty": "schwer",
+      "prerequisites": ["L5-M2"]
+    },
+    {
+      "mission_id": "L5-M4",
+      "level": 5,
+      "title": "PR nach Review-Feedback überarbeiten",
+      "story": "Dein PR hat ein 'Request Changes' bekommen. Arbeite das Feedback ein und bitte erneut um Review.",
+      "objective": "Review-Feedback umsetzen und den PR-Zyklus abschließen.",
+      "files_to_edit": [],
+      "branch_name_example": "",
+      "acceptance_criteria": [
+        "Feedback wurde gelesen",
+        "Änderungen wurden committed und gepusht",
+        "Erneuter Review wurde angefordert",
+        "PR wurde approved und gemerged"
+      ],
+      "github_skill": "Review-Zyklus, Zusammenarbeit",
+      "difficulty": "schwer",
+      "prerequisites": ["L5-M3"]
+    }
+  ]
+}
