@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Eluma GitHub School — Lerne GitHub durch echte Missionen">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+  <title>Eluma GitHub School</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-content">
+      <h1 class="site-title">Eluma GitHub School</h1>
+      <p class="site-subtitle">Lerne GitHub durch echte Missionen</p>
+    </div>
+    <nav class="main-nav">
+      <button class="nav-btn active" data-section="welcome">Welcome</button>
+      <button class="nav-btn" data-section="ideenboard">Ideenboard</button>
+      <button class="nav-btn" data-section="playground">Playground</button>
+      <button class="nav-btn" data-section="glossar">Glossar</button>
+      <button class="nav-btn" data-section="missionen">Missionen</button>
+    </nav>
+  </header>
+
+  <main class="content">
+    <!-- Welcome -->
+    <section id="welcome" class="section active">
+      <div class="section-header">
+        <h2>Willkommen!</h2>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <h3>Aktuelles Ziel</h3>
+          <p>Starte mit Level 1 und lerne die Grundlagen von Git und GitHub.</p>
+        </div>
+        <div class="card">
+          <h3>Nächste Mission</h3>
+          <p id="next-mission">Wird geladen...</p>
+        </div>
+        <div class="card">
+          <h3>So funktioniert's</h3>
+          <p>Jede Mission hat eine Story, ein Ziel und ein sichtbares Ergebnis. Du arbeitest auf Branches, erstellst Pull Requests und lernst GitHub im echten Workflow.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ideenboard -->
+    <section id="ideenboard" class="section">
+      <div class="section-header">
+        <h2>Ideenboard</h2>
+      </div>
+      <div class="filters">
+        <select id="filter-owner">
+          <option value="all">Alle Besitzer</option>
+          <option value="Mario">Mario</option>
+          <option value="Elvis">Elvis</option>
+        </select>
+        <select id="filter-category">
+          <option value="all">Alle Kategorien</option>
+        </select>
+        <select id="filter-status">
+          <option value="all">Alle Status</option>
+          <option value="raw">Roh</option>
+          <option value="discussing">In Diskussion</option>
+          <option value="validated">Validiert</option>
+          <option value="parked">Geparkt</option>
+          <option value="building">Im Bau</option>
+        </select>
+      </div>
+      <div id="ideas-grid" class="card-grid">
+        <div class="card placeholder-card">
+          <h3>Ideen werden bald geladen</h3>
+          <p>Hier erscheinen eure Ideen aus den CSV-Dateien.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Playground -->
+    <section id="playground" class="section">
+      <div class="section-header">
+        <h2>Playground</h2>
+      </div>
+      <div class="card-grid">
+        <div class="card placeholder-card">
+          <h3>Playground kommt bald</h3>
+          <p>Hier kannst du Farben ändern, Buttons anpassen und Elemente ein- und ausblenden.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Glossar -->
+    <section id="glossar" class="section">
+      <div class="section-header">
+        <h2>Glossar</h2>
+      </div>
+      <div class="card-grid">
+        <div class="card placeholder-card">
+          <h3>Glossar kommt bald</h3>
+          <p>Hier werden Begriffe wie Commit, Branch, Pull Request und Merge einfach erklärt.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Missionen -->
+    <section id="missionen" class="section">
+      <div class="section-header">
+        <h2>Missionen</h2>
+      </div>
+      <div class="level-tabs">
+        <button class="level-tab active" data-level="all">Alle</button>
+        <button class="level-tab" data-level="1">Level 1</button>
+        <button class="level-tab" data-level="2">Level 2</button>
+        <button class="level-tab" data-level="3">Level 3</button>
+        <button class="level-tab" data-level="4">Level 4</button>
+        <button class="level-tab" data-level="5">Level 5</button>
+      </div>
+      <div id="missions-grid" class="card-grid">
+        <div class="card placeholder-card">
+          <h3>Missionen werden bald geladen</h3>
+          <p>Hier erscheinen alle Lernmissionen nach Level sortiert.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Eluma GitHub School — Mario & Elvis</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
