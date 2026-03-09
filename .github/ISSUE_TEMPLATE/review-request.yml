@@ -1,0 +1,27 @@
+name: "👀 Review anfordern"
+description: "Bitte um gezieltes Review eines Pull Requests"
+title: "[Review] "
+labels: ["review"]
+body:
+  - type: input
+    id: pr_link
+    attributes:
+      label: PR-Link
+      description: "Link zum Pull Request"
+      placeholder: "https://github.com/alphinus/Eluma-Github-School/pull/..."
+    validations:
+      required: true
+  - type: textarea
+    id: focus
+    attributes:
+      label: Worauf soll geachtet werden?
+      description: "Was ist dir besonders wichtig beim Review?"
+      placeholder: "z.B. Stimmt die Logik? Sieht das Design gut aus?"
+    validations:
+      required: true
+  - type: textarea
+    id: uncertainties
+    attributes:
+      label: Bekannte Unsicherheiten
+      description: "Gibt es Stellen, bei denen du dir unsicher bist?"
+      placeholder: "z.B. Bin mir nicht sicher, ob die CSS-Klasse richtig ist..."

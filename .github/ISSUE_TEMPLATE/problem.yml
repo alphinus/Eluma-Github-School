@@ -1,0 +1,31 @@
+name: "🐛 Problem melden"
+description: "Ein Problem oder einen Blocker melden"
+title: "[Problem] "
+labels: ["problem"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: "Was funktioniert nicht oder blockiert dich?"
+      placeholder: "Beschreibe das Problem..."
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Kontext
+      description: "Wo tritt das Problem auf? Was hast du vorher gemacht?"
+      placeholder: "z.B. Beim Öffnen von index.html im Browser..."
+  - type: textarea
+    id: expected
+    attributes:
+      label: Gewünschtes Ergebnis
+      description: "Was sollte eigentlich passieren?"
+      placeholder: "Eigentlich sollte..."
+  - type: textarea
+    id: guess
+    attributes:
+      label: Vermutung
+      description: "Hast du eine Idee, woran es liegen könnte?"
+      placeholder: "Ich glaube, es liegt an..."
