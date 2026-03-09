@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Eluma GitHub School — Lerne GitHub durch echte Missionen">
+  <meta name="author" content="Mario & Elvis">
+  <meta property="og:title" content="Eluma GitHub School">
+  <meta property="og:description" content="Lerne GitHub durch echte Missionen — Branch, Commit, PR, Review">
+  <meta property="og:type" content="website">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
   <title>Eluma GitHub School</title>
   <link rel="stylesheet" href="styles.css">
@@ -148,12 +152,58 @@
     <section id="glossar" class="section">
       <div class="section-header">
         <h2>Glossar</h2>
+        <p class="section-desc">Die wichtigsten Git- und GitHub-Begriffe einfach erklärt.</p>
       </div>
-      <div class="card-grid">
-        <div class="card placeholder-card">
-          <h3>Glossar kommt bald</h3>
-          <p>Hier werden Begriffe wie Commit, Branch, Pull Request und Merge einfach erklärt.</p>
-        </div>
+      <div class="glossar-list">
+        <details class="glossar-item">
+          <summary class="glossar-term">Commit</summary>
+          <div class="glossar-content">
+            <p>Ein gespeicherter Zwischenstand deiner Änderungen. Wie ein Speicherpunkt in einem Spiel — du kannst jederzeit dorthin zurückkehren.</p>
+            <p class="glossar-mission">Passende Mission: <a href="#" data-mission="L1-M1">L1-M1 — Button-Farbe ändern</a></p>
+          </div>
+        </details>
+        <details class="glossar-item">
+          <summary class="glossar-term">Push</summary>
+          <div class="glossar-content">
+            <p>Der Moment, in dem dein lokaler Stand zu GitHub hochgeladen wird. Vorher sieht nur dein Computer die Änderungen — nach dem Push auch GitHub.</p>
+            <p class="glossar-mission">Passende Mission: <a href="#" data-mission="L2-M2">L2-M2 — Branch pushen und prüfen</a></p>
+          </div>
+        </details>
+        <details class="glossar-item">
+          <summary class="glossar-term">Branch</summary>
+          <div class="glossar-content">
+            <p>Ein separater Arbeitszweig für eine Aufgabe. Stell dir vor, du kopierst ein Blatt Papier und schreibst auf der Kopie weiter — das Original (main) bleibt sauber.</p>
+            <p class="glossar-mission">Passende Mission: <a href="#" data-mission="L3-M1">L3-M1 — Idee in eigenem Branch anlegen</a></p>
+          </div>
+        </details>
+        <details class="glossar-item">
+          <summary class="glossar-term">Pull Request (PR)</summary>
+          <div class="glossar-content">
+            <p>Eine Bitte, deinen Branch mit main zu vergleichen und zu übernehmen. Du sagst damit: „Schau dir meine Änderungen an, bevor sie auf main landen."</p>
+            <p class="glossar-mission">Passende Mission: <a href="#" data-mission="L1-M1">L1-M1 — Button-Farbe ändern</a></p>
+          </div>
+        </details>
+        <details class="glossar-item">
+          <summary class="glossar-term">Review</summary>
+          <div class="glossar-content">
+            <p>Die Prüfung deines Pull Requests durch die andere Person. Der Reviewer schaut sich die Änderungen an und gibt Feedback: Approve, Comment oder Request Changes.</p>
+            <p class="glossar-mission">Passende Mission: <a href="#" data-mission="L5-M2">L5-M2 — Ersten Review-Kommentar schreiben</a></p>
+          </div>
+        </details>
+        <details class="glossar-item">
+          <summary class="glossar-term">Merge</summary>
+          <div class="glossar-content">
+            <p>Das Zusammenführen einer freigegebenen Änderung. Dein Branch wird mit main verschmolzen und die Änderungen sind für alle sichtbar.</p>
+            <p class="glossar-mission">Passende Mission: <a href="#" data-mission="L5-M4">L5-M4 — PR nach Review-Feedback überarbeiten</a></p>
+          </div>
+        </details>
+        <details class="glossar-item">
+          <summary class="glossar-term">Konflikt</summary>
+          <div class="glossar-content">
+            <p>Eine Stelle, an der Git nicht automatisch entscheiden kann, welche Änderung gelten soll. Passiert wenn zwei Personen die gleiche Zeile ändern. Kein Fehler — eine Entscheidung!</p>
+            <p class="glossar-mission">Passende Mission: <a href="#" data-mission="L4-M1">L4-M1 — Überschriften-Konflikt</a></p>
+          </div>
+        </details>
       </div>
     </section>
 
