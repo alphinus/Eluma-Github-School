@@ -1,0 +1,40 @@
+{
+  "themes": {
+    "default": {
+      "name": "Standard",
+      "primary": "#2d6df6",
+      "secondary": "#1a1a2e",
+      "accent": "#f59e0b",
+      "bg": "#f5f7fa"
+    },
+    "ocean": {
+      "name": "Ozean",
+      "primary": "#0891b2",
+      "secondary": "#164e63",
+      "accent": "#06b6d4",
+      "bg": "#ecfeff"
+    },
+    "forest": {
+      "name": "Wald",
+      "primary": "#16a34a",
+      "secondary": "#14532d",
+      "accent": "#84cc16",
+      "bg": "#f0fdf4"
+    },
+    "sunset": {
+      "name": "Sonnenuntergang",
+      "primary": "#e11d48",
+      "secondary": "#4c0519",
+      "accent": "#f97316",
+      "bg": "#fff1f2"
+    },
+    "night": {
+      "name": "Nacht",
+      "primary": "#8b5cf6",
+      "secondary": "#0f0f23",
+      "accent": "#a78bfa",
+      "bg": "#1e1b2e"
+    }
+  },
+  "activeTheme": "default"
+}
