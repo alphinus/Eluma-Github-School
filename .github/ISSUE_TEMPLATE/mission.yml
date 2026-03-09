@@ -1,0 +1,46 @@
+name: "🎯 Neue Mission"
+description: "Eine neue Lernmission vorschlagen"
+title: "[Mission] "
+labels: ["mission"]
+body:
+  - type: dropdown
+    id: level
+    attributes:
+      label: Level
+      options:
+        - "Level 1 — Erste Schritte"
+        - "Level 2 — Lokal vs. Remote"
+        - "Level 3 — Branches nutzen"
+        - "Level 4 — Konflikte lösen"
+        - "Level 5 — Reviews & Qualität"
+    validations:
+      required: true
+  - type: input
+    id: title
+    attributes:
+      label: Missionstitel
+      placeholder: "z.B. Button-Farbe ändern"
+    validations:
+      required: true
+  - type: textarea
+    id: objective
+    attributes:
+      label: Ziel
+      description: "Was soll der Spieler am Ende können?"
+      placeholder: "Nach dieser Mission kann der Spieler..."
+    validations:
+      required: true
+  - type: textarea
+    id: files
+    attributes:
+      label: Betroffene Dateien
+      description: "Welche Dateien müssen geändert werden?"
+      placeholder: "z.B. styles.css, app.js"
+  - type: textarea
+    id: github_skill
+    attributes:
+      label: GitHub-Lerneffekt
+      description: "Welche GitHub-Kompetenz wird trainiert?"
+      placeholder: "z.B. Branch erstellen, PR öffnen, Review geben"
+    validations:
+      required: true

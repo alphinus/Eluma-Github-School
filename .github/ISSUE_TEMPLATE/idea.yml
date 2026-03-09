@@ -1,0 +1,55 @@
+name: "💡 Neue Idee"
+description: "Eine neue Idee vorschlagen"
+title: "[Idee] "
+labels: ["idee"]
+body:
+  - type: dropdown
+    id: category
+    attributes:
+      label: Kategorie
+      options:
+        - App-Idee
+        - Automatisierung
+        - KI-Workflow
+        - Geschäftsmodell
+        - Content
+        - Experiment
+        - Offene Frage
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Beschreibung
+      description: "Was ist die Idee?"
+      placeholder: "Beschreibe deine Idee in 2-3 Sätzen..."
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: "Welches Problem löst diese Idee?"
+      placeholder: "Was nervt gerade oder fehlt?"
+  - type: textarea
+    id: benefit
+    attributes:
+      label: Nutzen
+      description: "Was bringt es, wenn wir das umsetzen?"
+      placeholder: "Was wäre der Vorteil?"
+  - type: textarea
+    id: next_step
+    attributes:
+      label: Nächster Schritt
+      description: "Was müsste man als Erstes tun?"
+      placeholder: "z.B. Recherchieren, Prototyp bauen, besprechen..."
+  - type: dropdown
+    id: owner
+    attributes:
+      label: Besitzer
+      options:
+        - Mario
+        - Elvis
+        - Beide
+    validations:
+      required: true
