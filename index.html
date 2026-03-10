@@ -13,47 +13,211 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
   <header class="site-header">
-    <div class="header-content">
-      <h1 class="site-title">Eluma GitHub School</h1>
-      <p class="site-subtitle">Lerne GitHub durch echte Missionen</p>
+    <div class="header-shell">
+      <div class="header-copy">
+        <span class="eyebrow">Academy Run</span>
+        <h1 class="site-title">Eluma GitHub School</h1>
+        <p class="site-subtitle">GitHub lernen wie ein Kampagnen-Spiel: Quests, Unlocks, Boss-Missionen, Ränge und sichtbare Fortschritte.</p>
+        <div class="header-feature-grid">
+          <article class="header-feature-card">
+            <span class="mini-label">Quest Loop</span>
+            <strong>Branch zu Boss Fight</strong>
+            <p>Jede echte GitHub-Aktion wird als Mission, Unlock oder Academy-Clear lesbar gemacht.</p>
+          </article>
+          <article class="header-feature-card">
+            <span class="mini-label">Rivalry</span>
+            <strong>Mario vs. Elvis</strong>
+            <p>Zwei getrennte Profile, ein gemeinsames Leaderboard und sichtbarer Vorsprung pro Session.</p>
+          </article>
+          <article class="header-feature-card feature-accent">
+            <span class="mini-label">GitHub Ready</span>
+            <strong>Live-Scoring vorbereitet</strong>
+            <p>Platzhalter sind aktiv, die echten Usernames koennen spaeter direkt ins Punktesystem eingehangen werden.</p>
+          </article>
+        </div>
+      </div>
+
+      <aside class="player-banner">
+        <div class="profile-switcher-wrap">
+          <div class="player-rank-block">
+            <span class="eyebrow">Dein Rang</span>
+            <strong id="player-rank-name">Recruit</strong>
+            <p id="player-rank-title">Neuling im Repo</p>
+          </div>
+          <div class="profile-switcher" id="profile-switcher">
+            <button class="profile-chip active" data-player="mario">Mario</button>
+            <button class="profile-chip" data-player="elvis">Elvis</button>
+          </div>
+        </div>
+        <div class="active-player-card">
+          <span class="eyebrow">Aktiver Spieler</span>
+          <strong id="active-player-name">Mario</strong>
+          <p id="active-player-copy">Eigenes Profil, eigener Fortschritt, eigener Rang.</p>
+        </div>
+        <div class="player-banner-stats">
+          <div class="banner-stat">
+            <span class="hud-label">XP</span>
+            <strong id="hud-xp">0</strong>
+          </div>
+          <div class="banner-stat">
+            <span class="hud-label">Quests</span>
+            <strong id="hud-completed">0/0</strong>
+          </div>
+          <div class="banner-stat">
+            <span class="hud-label">Streak</span>
+            <strong id="hud-streak">1 Tag</strong>
+          </div>
+          <div class="banner-stat">
+            <span class="hud-label">Bosses</span>
+            <strong id="hud-bosses">0</strong>
+          </div>
+        </div>
+        <div class="rank-progress-shell">
+          <div class="rank-progress-labels">
+            <span id="hud-rank-progress-label">0 / 150 XP</span>
+            <span id="hud-next-rank">Nächster Rang: Operator</span>
+          </div>
+          <div class="progress-bar rank-bar" aria-hidden="true"><span id="rank-progress-bar"></span></div>
+        </div>
+        <div class="rivalry-strip">
+          <div>
+            <span class="hud-label">Leaderboard</span>
+            <strong id="leader-gap">Noch kein Vorsprung</strong>
+          </div>
+          <p id="leaderboard-motivation">Wechsle zwischen Mario und Elvis, um beide getrennt voranzubringen.</p>
+        </div>
+      </aside>
     </div>
+
     <nav class="main-nav">
-      <button class="nav-btn active" data-section="welcome">Welcome</button>
+      <button class="nav-btn active" data-section="welcome">Academy</button>
       <button class="nav-btn" data-section="ideenboard">Ideenboard</button>
-      <button class="nav-btn" data-section="playground">Playground</button>
+      <button class="nav-btn" data-section="playground">Training Lab</button>
       <button class="nav-btn" data-section="glossar">Glossar</button>
-      <button class="nav-btn" data-section="missionen">Missionen</button>
+      <button class="nav-btn" data-section="missionen">Quest Board</button>
     </nav>
   </header>
 
   <main class="content">
-    <!-- Welcome -->
     <section id="welcome" class="section active">
-      <div class="section-header">
-        <h2>Willkommen!</h2>
+      <div class="hero-panel">
+        <div class="hero-copy card">
+          <span class="eyebrow dark">Aktive Kampagne</span>
+          <h2 id="next-mission-title">Wird geladen...</h2>
+          <p id="next-mission-summary">Die App sucht gerade deine nächste sinnvolle Quest.</p>
+          <div class="hero-metrics">
+            <span class="badge" id="next-mission-level">Level ?</span>
+            <span class="badge badge-xp" id="next-mission-xp">0 XP</span>
+            <span class="badge badge-boss" id="next-mission-mode">Quest</span>
+          </div>
+          <div class="hero-actions">
+            <button class="primary-action" id="start-next-mission">Nächste Quest öffnen</button>
+            <button class="secondary-action" id="jump-to-playground">Erst trainieren</button>
+          </div>
+        </div>
+
+        <aside class="hero-side-stack">
+          <div class="card summary-card">
+            <span class="mini-label dark">Status</span>
+            <h3 id="summary-progress">0%</h3>
+            <p id="summary-progress-copy">Noch keine Mission abgeschlossen.</p>
+          </div>
+          <div class="card summary-card">
+            <span class="mini-label dark">Freigeschaltet</span>
+            <h3 id="summary-badges">0</h3>
+            <p id="summary-badges-copy">Die erste Auszeichnung wartet.</p>
+          </div>
+          <div class="card summary-card accent-card">
+            <span class="mini-label dark">Rolle</span>
+            <h3 id="summary-class">Builder</h3>
+            <p id="summary-level-copy">Du baust gerade Grundlagen auf.</p>
+          </div>
+        </aside>
       </div>
-      <div class="card-grid">
-        <div class="card">
-          <h3>Aktuelles Ziel</h3>
-          <p>Starte mit Level 1 und lerne die Grundlagen von Git und GitHub.</p>
+
+      <div class="dashboard-grid top-grid">
+        <article class="card command-card">
+          <div class="card-headline">
+            <span class="eyebrow dark">Command Center</span>
+            <h3>Wenn du sofort loslegen willst</h3>
+          </div>
+          <ol class="coach-steps">
+            <li>Starte die aktive Quest oder gehe zuerst ins Training Lab.</li>
+            <li>Arbeite die Aufgabe real über Branch, Commit, Push und PR ab.</li>
+            <li>Markiere sie hier als erledigt und schalte neue Akademien frei.</li>
+          </ol>
+        </article>
+
+        <article class="card boss-card">
+          <div class="card-headline">
+            <span class="eyebrow dark">Boss Mission</span>
+            <h3 id="boss-title">Wird geladen...</h3>
+          </div>
+          <p id="boss-summary">Die nächste Boss-Mission wird vorbereitet.</p>
+          <div class="badge-row">
+            <span class="badge badge-boss" id="boss-level">Boss</span>
+            <span class="badge badge-xp" id="boss-xp">0 XP</span>
+          </div>
+          <button class="secondary-action compact-action" id="jump-to-boss">Zum Boss springen</button>
+        </article>
+      </div>
+
+      <div class="card academy-panel">
+        <div class="section-header compact">
+          <h2>Academy Map</h2>
+          <p class="section-desc">Jede Akademie steht für ein GitHub-Level. Neue Gebiete werden erst freigeschaltet, wenn du den Boss des vorherigen Levels schlägst.</p>
         </div>
-        <div class="card">
-          <h3>Nächste Mission</h3>
-          <p id="next-mission">Wird geladen...</p>
-        </div>
-        <div class="card">
-          <h3>So funktioniert's</h3>
-          <p>Jede Mission hat eine Story, ein Ziel und ein sichtbares Ergebnis. Du arbeitest auf Branches, erstellst Pull Requests und lernst GitHub im echten Workflow.</p>
-        </div>
+        <div id="academy-map" class="academy-map"></div>
+      </div>
+
+      <div class="dashboard-grid mid-grid triple-grid">
+        <article class="card achievement-panel">
+          <div class="card-headline">
+            <span class="eyebrow dark">Achievement Cabinet</span>
+            <h3>Auszeichnungen & Meilensteine</h3>
+          </div>
+          <div id="achievement-grid" class="achievement-grid"></div>
+        </article>
+
+        <article class="card leaderboard-panel accent-card">
+          <div class="card-headline">
+            <span class="eyebrow dark">Leaderboard</span>
+            <h3>Mario vs. Elvis</h3>
+          </div>
+          <div id="leaderboard-list" class="leaderboard-list"></div>
+          <p id="leaderboard-summary">Das Duell startet, sobald Fortschritt gesammelt wird.</p>
+        </article>
+
+        <article class="card event-panel">
+          <div class="card-headline">
+            <span class="eyebrow dark">Live Feed</span>
+            <h3>Letzte Freischaltungen</h3>
+          </div>
+          <ul id="event-feed" class="event-feed"></ul>
+        </article>
       </div>
     </section>
 
-    <!-- Ideenboard -->
     <section id="ideenboard" class="section">
       <div class="section-header">
         <h2>Ideenboard</h2>
+        <p class="section-desc">Echte Ideen für echte Arbeit. Nutze die Filter, um vom Game-Loop wieder in produktive Repo-Arbeit zu wechseln.</p>
       </div>
+
+      <div class="dashboard-grid compact-grid">
+        <div class="card helper-card">
+          <strong>Was du hier tun kannst</strong>
+          <p id="ideas-guide">Filter nach Besitzer, Kategorie oder Status. Neue Ideen werden über CSV oder GitHub-Issues ergänzt.</p>
+        </div>
+        <div class="card helper-card accent-card soft-accent">
+          <strong>Ideen-Energie</strong>
+          <p id="ideas-energy">0 Karten geladen.</p>
+        </div>
+      </div>
+
       <div class="filters">
         <select id="filter-owner">
           <option value="all">Alle Besitzer</option>
@@ -72,26 +236,50 @@
           <option value="building">Im Bau</option>
         </select>
       </div>
+
       <div id="ideas-grid" class="card-grid">
         <div class="card placeholder-card">
-          <h3>Ideen werden bald geladen</h3>
-          <p>Hier erscheinen eure Ideen aus den CSV-Dateien.</p>
+          <h3>Ideen werden geladen</h3>
+          <p>Gleich erscheinen eure Karten aus den CSV-Dateien.</p>
         </div>
       </div>
     </section>
 
-    <!-- Playground -->
     <section id="playground" class="section">
       <div class="section-header">
-        <h2>Playground</h2>
-        <p class="section-desc">Ändere Farben, Texte und Elemente — jede Codeänderung wird sofort sichtbar!</p>
+        <h2>Training Lab</h2>
+        <p class="section-desc">Hier sammelst du Übungs-XP, bevor du eine echte Repo-Quest angreifst. Jede Trainingseinheit wird separat verfolgt.</p>
       </div>
 
+      <div class="dashboard-grid compact-grid">
+        <article class="card training-summary-card">
+          <div class="card-headline">
+            <span class="eyebrow dark">Training Status</span>
+            <h3 id="practice-summary-title">4 Drills offen</h3>
+          </div>
+          <p id="practice-summary-copy">Trainiere Theme, Button, Badge und Karten-Toggle, um das Lab vollständig zu meistern.</p>
+          <div class="progress-bar" aria-hidden="true"><span id="practice-progress-bar"></span></div>
+        </article>
+        <article class="card training-summary-card accent-card">
+          <div class="card-headline">
+            <span class="eyebrow dark">Lab Reward</span>
+            <h3 id="practice-xp-total">0 XP</h3>
+          </div>
+          <p id="practice-unlock-copy">Das erste Training schaltet deinen Practice-Bonus frei.</p>
+        </article>
+      </div>
+
+      <div id="practice-grid" class="practice-grid"></div>
+
       <div class="card-grid">
-        <!-- Theme-Farbe-Switcher -->
-        <div class="card playground-card">
-          <h3>Theme-Farbe</h3>
-          <p>Wähle ein Farbschema für die ganze Seite:</p>
+        <div class="card playground-card" data-practice-card="theme">
+          <div class="challenge-headline">
+            <div>
+              <h3>Palette Shift</h3>
+              <p>Wähle ein Farbschema für die ganze Seite.</p>
+            </div>
+            <span class="badge badge-xp">12 XP</span>
+          </div>
           <div class="theme-switcher">
             <button class="theme-btn active" data-theme="default" style="background: #2d6df6;" title="Standard"></button>
             <button class="theme-btn" data-theme="ocean" style="background: #0891b2;" title="Ozean"></button>
@@ -102,10 +290,14 @@
           <p class="theme-name">Aktiv: <strong id="active-theme-name">Standard</strong></p>
         </div>
 
-        <!-- Button mit änderbarem Text + Farbe -->
-        <div class="card playground-card">
-          <h3>Magischer Button</h3>
-          <p>Ändere Text und Farbe dieses Buttons:</p>
+        <div class="card playground-card" data-practice-card="magic">
+          <div class="challenge-headline">
+            <div>
+              <h3>Button Forge</h3>
+              <p>Ändere Text und Farbe dieses Buttons.</p>
+            </div>
+            <span class="badge badge-xp">18 XP</span>
+          </div>
           <button id="magic-button" class="magic-btn">Klick mich!</button>
           <div class="playground-controls">
             <input type="text" id="btn-text-input" placeholder="Neuer Button-Text" maxlength="30">
@@ -114,13 +306,15 @@
           </div>
         </div>
 
-        <!-- Statusbadge -->
-        <div class="card playground-card">
-          <h3>Statusbadge</h3>
-          <p>Ändere den Status-Text:</p>
-          <div class="status-display">
-            <span id="status-badge" class="badge badge-status">Online</span>
+        <div class="card playground-card" data-practice-card="status">
+          <div class="challenge-headline">
+            <div>
+              <h3>Status Alchemy</h3>
+              <p>Ändere Status-Text und Signalwirkung.</p>
+            </div>
+            <span class="badge badge-xp">18 XP</span>
           </div>
+          <div class="status-display"><span id="status-badge" class="badge badge-status">Online</span></div>
           <div class="playground-controls">
             <input type="text" id="status-input" placeholder="Neuer Status" maxlength="20">
             <select id="status-color-select">
@@ -133,106 +327,98 @@
           </div>
         </div>
 
-        <!-- Testkarte ein-/ausblenden -->
-        <div class="card playground-card">
-          <h3>Testkarte</h3>
-          <p>Blende die Karte ein oder aus:</p>
+        <div class="card playground-card" data-practice-card="toggle">
+          <div class="challenge-headline">
+            <div>
+              <h3>Reveal Ritual</h3>
+              <p>Blende eine Karte ein oder aus, um direkte UI-Reaktionen zu sehen.</p>
+            </div>
+            <span class="badge badge-xp">14 XP</span>
+          </div>
           <button class="apply-btn" id="toggle-test-card">Karte anzeigen</button>
           <div id="test-card" class="test-card hidden">
             <div class="test-card-inner">
               <h4>Geheime Karte</h4>
-              <p>Diese Karte war versteckt! Du hast sie gefunden.</p>
+              <p>Diese Karte war versteckt. Solche sichtbaren Mini-Änderungen sind perfektes Training für erste PRs.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Glossar -->
     <section id="glossar" class="section">
       <div class="section-header">
         <h2>Glossar</h2>
-        <p class="section-desc">Die wichtigsten Git- und GitHub-Begriffe einfach erklärt.</p>
+        <p class="section-desc">Kurz erklärt, direkt mit Quests verbunden. Theorie nur, wenn sie sofort beim Spielen hilft.</p>
       </div>
       <div class="glossar-list">
-        <details class="glossar-item">
-          <summary class="glossar-term">Commit</summary>
-          <div class="glossar-content">
-            <p>Ein gespeicherter Zwischenstand deiner Änderungen. Wie ein Speicherpunkt in einem Spiel — du kannst jederzeit dorthin zurückkehren.</p>
-            <p class="glossar-mission">Passende Mission: <a href="#" data-mission="L1-M1">L1-M1 — Button-Farbe ändern</a></p>
-          </div>
-        </details>
-        <details class="glossar-item">
-          <summary class="glossar-term">Push</summary>
-          <div class="glossar-content">
-            <p>Der Moment, in dem dein lokaler Stand zu GitHub hochgeladen wird. Vorher sieht nur dein Computer die Änderungen — nach dem Push auch GitHub.</p>
-            <p class="glossar-mission">Passende Mission: <a href="#" data-mission="L2-M2">L2-M2 — Branch pushen und prüfen</a></p>
-          </div>
-        </details>
-        <details class="glossar-item">
-          <summary class="glossar-term">Branch</summary>
-          <div class="glossar-content">
-            <p>Ein separater Arbeitszweig für eine Aufgabe. Stell dir vor, du kopierst ein Blatt Papier und schreibst auf der Kopie weiter — das Original (main) bleibt sauber.</p>
-            <p class="glossar-mission">Passende Mission: <a href="#" data-mission="L3-M1">L3-M1 — Idee in eigenem Branch anlegen</a></p>
-          </div>
-        </details>
-        <details class="glossar-item">
-          <summary class="glossar-term">Pull Request (PR)</summary>
-          <div class="glossar-content">
-            <p>Eine Bitte, deinen Branch mit main zu vergleichen und zu übernehmen. Du sagst damit: „Schau dir meine Änderungen an, bevor sie auf main landen."</p>
-            <p class="glossar-mission">Passende Mission: <a href="#" data-mission="L1-M1">L1-M1 — Button-Farbe ändern</a></p>
-          </div>
-        </details>
-        <details class="glossar-item">
-          <summary class="glossar-term">Review</summary>
-          <div class="glossar-content">
-            <p>Die Prüfung deines Pull Requests durch die andere Person. Der Reviewer schaut sich die Änderungen an und gibt Feedback: Approve, Comment oder Request Changes.</p>
-            <p class="glossar-mission">Passende Mission: <a href="#" data-mission="L5-M2">L5-M2 — Ersten Review-Kommentar schreiben</a></p>
-          </div>
-        </details>
-        <details class="glossar-item">
-          <summary class="glossar-term">Merge</summary>
-          <div class="glossar-content">
-            <p>Das Zusammenführen einer freigegebenen Änderung. Dein Branch wird mit main verschmolzen und die Änderungen sind für alle sichtbar.</p>
-            <p class="glossar-mission">Passende Mission: <a href="#" data-mission="L5-M4">L5-M4 — PR nach Review-Feedback überarbeiten</a></p>
-          </div>
-        </details>
-        <details class="glossar-item">
-          <summary class="glossar-term">Konflikt</summary>
-          <div class="glossar-content">
-            <p>Eine Stelle, an der Git nicht automatisch entscheiden kann, welche Änderung gelten soll. Passiert wenn zwei Personen die gleiche Zeile ändern. Kein Fehler — eine Entscheidung!</p>
-            <p class="glossar-mission">Passende Mission: <a href="#" data-mission="L4-M1">L4-M1 — Überschriften-Konflikt</a></p>
-          </div>
-        </details>
+        <details class="glossar-item"><summary class="glossar-term">Commit</summary><div class="glossar-content"><p>Ein gespeicherter Zwischenstand deiner Änderungen. Wie ein Speicherpunkt in einem Spiel.</p><p class="glossar-mission">Passende Quest: <a href="#" data-mission="L1-M1">L1-M1 — Button-Farbe ändern</a></p></div></details>
+        <details class="glossar-item"><summary class="glossar-term">Push</summary><div class="glossar-content"><p>Der Moment, in dem dein lokaler Stand zu GitHub hochgeladen wird. Vorher sieht nur dein Computer die Änderung.</p><p class="glossar-mission">Passende Quest: <a href="#" data-mission="L2-M2">L2-M2 — Branch pushen und prüfen</a></p></div></details>
+        <details class="glossar-item"><summary class="glossar-term">Branch</summary><div class="glossar-content"><p>Ein separater Arbeitszweig für eine Aufgabe. So bleibt `main` sauber und stabil.</p><p class="glossar-mission">Passende Quest: <a href="#" data-mission="L3-M1">L3-M1 — Idee in eigenem Branch anlegen</a></p></div></details>
+        <details class="glossar-item"><summary class="glossar-term">Pull Request (PR)</summary><div class="glossar-content"><p>Eine Bitte, deinen Branch zu prüfen und zu übernehmen. Bitte reviewen, bevor das auf `main` landet.</p><p class="glossar-mission">Passende Quest: <a href="#" data-mission="L1-M1">L1-M1 — Button-Farbe ändern</a></p></div></details>
+        <details class="glossar-item"><summary class="glossar-term">Review</summary><div class="glossar-content"><p>Die Prüfung deines Pull Requests durch die andere Person. Feedback ist Teil des Spiels, nicht der Fehler.</p><p class="glossar-mission">Passende Quest: <a href="#" data-mission="L5-M2">L5-M2 — Ersten Review-Kommentar schreiben</a></p></div></details>
+        <details class="glossar-item"><summary class="glossar-term">Merge</summary><div class="glossar-content"><p>Das Zusammenführen einer freigegebenen Änderung. Danach ist dein Fortschritt im Hauptzweig sichtbar.</p><p class="glossar-mission">Passende Quest: <a href="#" data-mission="L5-M4">L5-M4 — PR nach Review-Feedback überarbeiten</a></p></div></details>
+        <details class="glossar-item"><summary class="glossar-term">Konflikt</summary><div class="glossar-content"><p>Eine Stelle, an der Git nicht automatisch entscheiden kann, welche Änderung gelten soll. Kein Fehler, sondern eine Boss-Entscheidung.</p><p class="glossar-mission">Passende Quest: <a href="#" data-mission="L4-M1">L4-M1 — Überschriften-Konflikt</a></p></div></details>
       </div>
     </section>
 
-    <!-- Missionen -->
     <section id="missionen" class="section">
       <div class="section-header">
-        <h2>Missionen</h2>
+        <h2>Quest Board</h2>
+        <p class="section-desc">Hier laufen alle Kampagnen zusammen. Nur freigeschaltete Quests sind direkt spielbar, der Rest bleibt sichtbar als Ziel.</p>
       </div>
-      <div class="level-tabs">
-        <button class="level-tab active" data-level="all">Alle</button>
-        <button class="level-tab" data-level="1">Level 1</button>
-        <button class="level-tab" data-level="2">Level 2</button>
-        <button class="level-tab" data-level="3">Level 3</button>
-        <button class="level-tab" data-level="4">Level 4</button>
-        <button class="level-tab" data-level="5">Level 5</button>
+
+      <div class="card mission-overview">
+        <div>
+          <strong>Quest Guide</strong>
+          <p id="mission-guide-copy">Wird geladen...</p>
+        </div>
+        <div class="progress-bar" aria-hidden="true"><span id="mission-progress-bar"></span></div>
       </div>
+
+      <div class="dashboard-grid compact-grid mission-status-grid">
+        <div class="card summary-card">
+          <span class="mini-label dark">Aktives Level</span>
+          <h3 id="summary-level">Level 1</h3>
+          <p id="summary-level-panel-copy">Warm-up aktiv.</p>
+        </div>
+        <div class="card summary-card">
+          <span class="mini-label dark">Nächster Unlock</span>
+          <h3 id="hud-badge">Scout</h3>
+          <p id="summary-unlock-copy">Mehr Fortschritt schaltet neue Inhalte frei.</p>
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <div class="level-tabs">
+          <button class="level-tab active" data-level="all">Alle Levels</button>
+          <button class="level-tab" data-level="1">Level 1</button>
+          <button class="level-tab" data-level="2">Level 2</button>
+          <button class="level-tab" data-level="3">Level 3</button>
+          <button class="level-tab" data-level="4">Level 4</button>
+          <button class="level-tab" data-level="5">Level 5</button>
+        </div>
+        <div class="view-tabs" id="mission-view-tabs">
+          <button class="view-tab active" data-view="unlocked">Spielbar</button>
+          <button class="view-tab" data-view="boss">Bosses</button>
+          <button class="view-tab" data-view="locked">Gesperrt</button>
+          <button class="view-tab" data-view="all">Alle</button>
+        </div>
+      </div>
+
+      <div id="campaign-strip" class="campaign-strip"></div>
       <div id="missions-grid" class="card-grid">
         <div class="card placeholder-card">
-          <h3>Missionen werden bald geladen</h3>
-          <p>Hier erscheinen alle Lernmissionen nach Level sortiert.</p>
+          <h3>Quests werden geladen</h3>
+          <p>Gleich erscheinen alle Kampagnen nach Level sortiert.</p>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p>Eluma GitHub School — Mario & Elvis</p>
-  </footer>
-
+  <footer class="site-footer"><p>Eluma GitHub School — Mario & Elvis</p></footer>
   <script src="app.js"></script>
 </body>
 </html>
+
+

@@ -1,0 +1,36 @@
+{
+  "mode": "github-sync",
+  "scope": {
+    "active": "all-repos",
+    "primary_repo": "Eluma-Github-School",
+    "options": ["eluma-only", "all-repos"],
+    "note": "Switch to eluma-only if only this repository should count."
+  },
+  "sync": {
+    "output": "data/players/github-leaderboard.json",
+    "token_secret": "ELUMA_GITHUB_SCHOOL_TOKEN",
+    "repo_env": "GITHUB_REPOSITORY",
+    "include_private_when_token_present": true
+  },
+  "players": {
+    "mario": {
+      "github_username": "mario-placeholder",
+      "status": "placeholder",
+      "aliases": []
+    },
+    "elvis": {
+      "github_username": "elvis-placeholder",
+      "status": "placeholder",
+      "aliases": []
+    }
+  },
+  "scoring": {
+    "merged_pr": 80,
+    "pull_request_opened": 30,
+    "review": 45,
+    "commit": 10,
+    "issue": 25,
+    "comment": 12,
+    "max_commit_pages": 10
+  }
+}

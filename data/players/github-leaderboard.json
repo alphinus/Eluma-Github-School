@@ -1,0 +1,44 @@
+{
+  "updated_at": "2026-03-10T14:39:12Z",
+  "source": "github-sync-script",
+  "token_mode": "none",
+  "scope": {
+    "active": "all-repos",
+    "primary_repo": "Eluma-Github-School",
+    "resolved_repo": "Eluma-Github-School"
+  },
+  "players": [
+    {
+      "id": "mario",
+      "github_username": "mario-placeholder",
+      "github_score": 0,
+      "pull_requests": 0,
+      "merged_pull_requests": 0,
+      "reviews": 0,
+      "commits": 0,
+      "issues": 0,
+      "comments": 0,
+      "status": "placeholder",
+      "scope": "all-repos",
+      "note": "Username placeholder active."
+    },
+    {
+      "id": "elvis",
+      "github_username": "elvis-placeholder",
+      "github_score": 0,
+      "pull_requests": 0,
+      "merged_pull_requests": 0,
+      "reviews": 0,
+      "commits": 0,
+      "issues": 0,
+      "comments": 0,
+      "status": "placeholder",
+      "scope": "all-repos",
+      "note": "Username placeholder active."
+    }
+  ],
+  "notes": [
+    "All-repos mode uses GitHub search counts. Commit scoring is only filled in eluma-only mode.",
+    "Set the ELUMA_GITHUB_SCHOOL_TOKEN secret for reliable private-repo coverage across accounts."
+  ]
+}
