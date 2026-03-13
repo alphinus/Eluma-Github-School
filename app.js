@@ -7,6 +7,7 @@ let toastTimer = null;
 let githubPlayerConfig = null;
 let githubLeaderboard = [];
 let githubSyncMeta = null;
+let missionProgress = null;
 
 const PROFILE_STORAGE_KEY = 'eluma-github-school-player-profiles';
 const ACTIVE_PLAYER_KEY = 'eluma-github-school-active-player';
@@ -76,7 +77,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initPlayground();
   initMissionActions();
   initAcademyActions();
-  await Promise.all([loadCategories(), loadIdeas(), loadMissions(), loadGithubData()]);
+  await Promise.all([loadCategories(), loadIdeas(), loadMissions(), loadGithubData(), loadMissionProgress()]);
   initIdeaFilters();
   initGlossarLinks();
   refreshDashboard();
@@ -243,6 +244,7 @@ function getLeaderboardEntries() {
 
 function getCompletedSet() { return new Set(playerState.completedMissions); }
 function isMissionCompleted(missionId) { return getCompletedSet().has(missionId); }
+function isMissionVerified(missionId) { return !!(missionProgress?.[activePlayerId]?.verified_missions?.[missionId]); }
 function getCompletedCount() { return getCompletedSet().size; }
 function getCompletedPracticeCount() { return new Set(playerState.completedPractices).size; }
 function getBossMission(level) { const items = missionsData.filter(m => m.level === level); return items[items.length - 1] || null; }
@@ -613,6 +615,37 @@ async function loadMissions() {
   }
 }
 
+async function loadMissionProgress() {
+  try {
+    const response = await fetch('data/players/mission-progress.json');
+    if (!response.ok) throw new Error('No progress file');
+    const data = await response.json();
+    missionProgress = data?.players || {};
+    applyVerifiedMissions();
+  } catch (error) {
+    missionProgress = {};
+    console.log('Mission-Progress nicht geladen:', error);
+  }
+}
+
+function applyVerifiedMissions() {
+  if (!missionProgress || !activePlayerId) return;
+  const playerData = missionProgress[activePlayerId];
+  if (!playerData?.verified_missions) return;
+  const verified = Object.keys(playerData.verified_missions);
+  let changed = false;
+  for (const missionId of verified) {
+    if (!playerState.completedMissions.includes(missionId)) {
+      playerState.completedMissions.push(missionId);
+      logEvent(`Quest auto-verifiziert: ${missionId} (via GitHub PR)`);
+      changed = true;
+    }
+  }
+  if (changed) {
+    savePlayerState();
+  }
+}
+
 async function loadGithubData() {
   try {
     const [configResponse, leaderboardResponse] = await Promise.all([
@@ -702,11 +735,12 @@ function renderMissions(missions) {
     const unlocked = isMissionUnlocked(mission);
     const boss = isBossMission(mission);
     const difficulty = difficultyColors[mission.difficulty] || { bg: '#eff6ff', color: '#1d4ed8' };
-    const classes = ['mission-card', completed ? 'is-done' : '', boss ? 'is-boss' : '', !unlocked && !completed ? 'is-locked' : ''].filter(Boolean).join(' ');
+    const verified = isMissionVerified(mission.mission_id);
+    const classes = ['mission-card', completed ? 'is-done' : '', boss ? 'is-boss' : '', !unlocked && !completed ? 'is-locked' : '', verified ? 'is-verified' : ''].filter(Boolean).join(' ');
     const prerequisites = (mission.prerequisites || []).length > 0 ? mission.prerequisites.join(', ') : 'Keine';
     const reward = getMissionPoints(mission);
     const lockedReason = !unlocked && !completed ? getLockedReason(mission) : '';
-    return `<article class="${classes}" style="--mission-reward:${Math.min(100, reward)}%;"><div class="mission-flare"></div><div class="mission-topline"><span class="badge">Level ${mission.level}</span><span class="badge badge-xp">${reward} XP</span><span class="badge ${completed ? 'badge-status' : unlocked ? '' : 'badge-status is-locked'}">${completed ? 'Erledigt' : unlocked ? 'Spielbar' : 'Gesperrt'}</span>${boss ? '<span class="badge badge-boss">Boss</span>' : ''}</div><div class="mission-banner"><div><h3>${escapeHtml(mission.title)}</h3><p class="mission-story">${escapeHtml(mission.story)}</p></div><div class="mission-reward-orb"><span>${reward}</span></div></div><div class="mission-meta"><p><strong>Ziel:</strong> ${escapeHtml(mission.objective)}</p>${Array.isArray(mission.files_to_edit) && mission.files_to_edit.length > 0 ? `<p><strong>Dateien:</strong> ${mission.files_to_edit.map(file => escapeHtml(file)).join(', ')}</p>` : '<p><strong>Dateien:</strong> Keine direkte Repo-Datei nötig</p>'}${mission.branch_name_example ? `<p><strong>Branch:</strong> ${escapeHtml(mission.branch_name_example)}</p>` : ''}<p><strong>Skill:</strong> ${escapeHtml(mission.github_skill)}</p></div><div class="mission-prereqs"><div class="badge-row"><span class="badge" style="background: ${difficulty.bg}; color: ${difficulty.color};">${escapeHtml(mission.difficulty)}</span><span class="badge">${escapeHtml(prerequisites)}</span></div>${lockedReason ? `<p><strong>Lock:</strong> ${escapeHtml(lockedReason)}</p>` : '<p>Freigeschaltet oder bereits gemeistert.</p>'}</div><div class="mission-criteria"><strong>Erfolgskriterien</strong><ul>${(mission.acceptance_criteria || []).map(criteria => `<li>${escapeHtml(criteria)}</li>`).join('')}</ul></div><div class="mission-actions"><button class="mission-toggle ${completed ? 'is-done' : 'is-open'}" data-mission-toggle="${mission.mission_id}" ${!completed && !unlocked ? 'disabled' : ''}>${completed ? 'Als offen markieren' : 'Quest abschliessen'}</button><button class="mission-jump" data-mission-focus="${mission.mission_id}">Fokussieren</button></div></article>`;
+    return `<article class="${classes}" style="--mission-reward:${Math.min(100, reward)}%;"><div class="mission-flare"></div><div class="mission-topline"><span class="badge">Level ${mission.level}</span><span class="badge badge-xp">${reward} XP</span><span class="badge ${completed ? 'badge-status' : unlocked ? '' : 'badge-status is-locked'}">${completed ? 'Erledigt' : unlocked ? 'Spielbar' : 'Gesperrt'}</span>${verified ? '<span class="badge badge-verified">GitHub Verifiziert</span>' : ''}${boss ? '<span class="badge badge-boss">Boss</span>' : ''}</div><div class="mission-banner"><div><h3>${escapeHtml(mission.title)}</h3><p class="mission-story">${escapeHtml(mission.story)}</p></div><div class="mission-reward-orb"><span>${reward}</span></div></div><div class="mission-meta"><p><strong>Ziel:</strong> ${escapeHtml(mission.objective)}</p>${Array.isArray(mission.files_to_edit) && mission.files_to_edit.length > 0 ? `<p><strong>Dateien:</strong> ${mission.files_to_edit.map(file => escapeHtml(file)).join(', ')}</p>` : '<p><strong>Dateien:</strong> Keine direkte Repo-Datei nötig</p>'}${mission.branch_name_example ? `<p><strong>Branch:</strong> ${escapeHtml(mission.branch_name_example)}</p>` : ''}<p><strong>Skill:</strong> ${escapeHtml(mission.github_skill)}</p></div><div class="mission-prereqs"><div class="badge-row"><span class="badge" style="background: ${difficulty.bg}; color: ${difficulty.color};">${escapeHtml(mission.difficulty)}</span><span class="badge">${escapeHtml(prerequisites)}</span></div>${lockedReason ? `<p><strong>Lock:</strong> ${escapeHtml(lockedReason)}</p>` : '<p>Freigeschaltet oder bereits gemeistert.</p>'}</div><div class="mission-criteria"><strong>Erfolgskriterien</strong><ul>${(mission.acceptance_criteria || []).map(criteria => `<li>${escapeHtml(criteria)}</li>`).join('')}</ul></div><div class="mission-actions"><button class="mission-toggle ${completed ? 'is-done' : 'is-open'}" data-mission-toggle="${mission.mission_id}" ${!completed && !unlocked ? 'disabled' : ''}>${completed ? 'Als offen markieren' : 'Quest abschliessen'}</button><button class="mission-jump" data-mission-focus="${mission.mission_id}">Fokussieren</button></div></article>`;
   }).join('');
 }
 

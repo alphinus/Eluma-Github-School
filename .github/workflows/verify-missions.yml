@@ -1,0 +1,60 @@
+name: Verify Missions
+
+on:
+  pull_request:
+    types: [opened, synchronize, closed]
+  pull_request_review:
+    types: [submitted]
+
+permissions:
+  contents: write
+  pull-requests: read
+
+concurrency:
+  group: verify-missions-${{ github.event.pull_request.number }}
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run mission verification
+        env:
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_BRANCH: ${{ github.event.pull_request.head.ref }}
+          PR_AUTHOR: ${{ github.event.pull_request.user.login }}
+          PR_MERGED: ${{ github.event.pull_request.merged }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          GITHUB_TOKEN: ${{ secrets.ELUMA_GITHUB_SCHOOL_TOKEN || github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python scripts/verify_missions.py
+
+      - name: Commit progress update
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- data/players/mission-progress.json; then
+            echo "No mission progress changes."
+            exit 0
+          fi
+          BRANCH="chore/mission-verify-pr-${{ github.event.pull_request.number }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
+          git add data/players/mission-progress.json
+          git commit -m "chore: verify missions from PR #${{ github.event.pull_request.number }}"
+          git push -u origin "$BRANCH"
+          gh pr create \
+            --title "chore: mission progress from PR #${{ github.event.pull_request.number }}" \
+            --body "Auto-verified mission completions from PR #${{ github.event.pull_request.number }}." \
+            --base main \
+            --head "$BRANCH"
