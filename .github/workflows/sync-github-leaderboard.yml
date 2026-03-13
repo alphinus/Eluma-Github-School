@@ -34,7 +34,7 @@ jobs:
 
       - name: Create leaderboard PR
         env:
-          GH_TOKEN: ${{ secrets.ELUMA_GITHUB_SCHOOL_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           if git diff --quiet -- data/players/github-leaderboard.json; then
             echo "No leaderboard changes."
