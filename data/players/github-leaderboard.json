@@ -10,7 +10,7 @@
   "players": [
     {
       "id": "mario",
-      "github_username": "mario-placeholder",
+      "github_username": "eluma0001-dev",
       "github_score": 0,
       "pull_requests": 0,
       "merged_pull_requests": 0,
@@ -18,13 +18,13 @@
       "commits": 0,
       "issues": 0,
       "comments": 0,
-      "status": "placeholder",
+      "status": "pending-sync",
       "scope": "all-repos",
-      "note": "Username placeholder active."
+      "note": "Usernames configured. Awaiting first sync."
     },
     {
       "id": "elvis",
-      "github_username": "elvis-placeholder",
+      "github_username": "Eluma0002",
       "github_score": 0,
       "pull_requests": 0,
       "merged_pull_requests": 0,
@@ -32,9 +32,9 @@
       "commits": 0,
       "issues": 0,
       "comments": 0,
-      "status": "placeholder",
+      "status": "pending-sync",
       "scope": "all-repos",
-      "note": "Username placeholder active."
+      "note": "Usernames configured. Awaiting first sync."
     }
   ],
   "notes": [
