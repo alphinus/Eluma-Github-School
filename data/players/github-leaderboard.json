@@ -1,11 +1,11 @@
 {
-  "updated_at": "2026-03-10T14:39:12Z",
+  "updated_at": "2026-03-13T14:01:49Z",
   "source": "github-sync-script",
-  "token_mode": "none",
+  "token_mode": "personal-token",
   "scope": {
     "active": "all-repos",
     "primary_repo": "Eluma-Github-School",
-    "resolved_repo": "Eluma-Github-School"
+    "resolved_repo": "alphinus/Eluma-Github-School"
   },
   "players": [
     {
@@ -18,9 +18,9 @@
       "commits": 0,
       "issues": 0,
       "comments": 0,
-      "status": "pending-sync",
+      "status": "synced",
       "scope": "all-repos",
-      "note": "Usernames configured. Awaiting first sync."
+      "note": "Live sync completed."
     },
     {
       "id": "elvis",
@@ -32,9 +32,9 @@
       "commits": 0,
       "issues": 0,
       "comments": 0,
-      "status": "pending-sync",
+      "status": "synced",
       "scope": "all-repos",
-      "note": "Usernames configured. Awaiting first sync."
+      "note": "Live sync completed."
     }
   ],
   "notes": [
