@@ -8,7 +8,7 @@ on:
 permissions:
   contents: write
   issues: read
-  pull-requests: read
+  pull-requests: write
 
 concurrency:
   group: sync-github-leaderboard
@@ -32,14 +32,23 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: python scripts/sync_github_leaderboard.py
 
-      - name: Commit leaderboard update
+      - name: Create leaderboard PR
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           if git diff --quiet -- data/players/github-leaderboard.json; then
             echo "No leaderboard changes."
             exit 0
           fi
+          BRANCH="chore/sync-leaderboard-$(date +%Y%m%d-%H%M%S)"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$BRANCH"
           git add data/players/github-leaderboard.json
           git commit -m "chore: sync GitHub leaderboard"
-          git push
+          git push -u origin "$BRANCH"
+          gh pr create \
+            --title "chore: sync GitHub leaderboard" \
+            --body "Automated leaderboard sync via GitHub Actions." \
+            --base main \
+            --head "$BRANCH"
